@@ -24,13 +24,12 @@ class OpenAIService {
       {
         'role': 'system',
         'content':
-            'You are a helpful first-date planning assistant. '
-            'Return ONLY valid JSON with keys: '
-            '{"outfit": string, "first_words": [string, string, string], '
-            '"attitude": [string, string, string], "mistakes": [string, string, string], '
-            '"timing": string}. '
-            'Keep advice respectful, safe, practical, and non-manipulative. '
-            'No explicit sexual content. No markdown. No extra text.',
+            'Return ONLY valid JSON. No markdown, no commentary, no extra keys. '
+            'Schema: {"title": string, "summary": string, "outfit": [string], '
+            '"what_to_say": [string], "how_to_act": [string], '
+            '"mistakes_to_avoid": [string], "timing": [string]}. '
+            'Tone: premium, confident, supportive. Keep advice respectful, '
+            'safe, and non-manipulative. Avoid explicit sexual content.',
       },
       {
         'role': 'user',
@@ -51,7 +50,10 @@ class OpenAIService {
           {
             'role': 'system',
             'content':
-                'Fix the JSON and return ONLY valid JSON with the required keys. '
+                'Fix JSON. Return ONLY valid JSON using the schema: '
+                '{"title": string, "summary": string, "outfit": [string], '
+                '"what_to_say": [string], "how_to_act": [string], '
+                '"mistakes_to_avoid": [string], "timing": [string]}. '
                 'No markdown. No extra text.',
           },
           {

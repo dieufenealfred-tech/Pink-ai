@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'screens/splash_page.dart';
+import 'screens/intro_page.dart';
+import 'theme/app_theme.dart';
 
 void main() {
   runApp(const PinkAiApp());
@@ -13,11 +14,8 @@ class PinkAiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pink AI',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
-        useMaterial3: true,
-      ),
-      home: const SplashPage(),
+      theme: AppTheme.theme,
+      home: const IntroPage(),
     );
   }
 }

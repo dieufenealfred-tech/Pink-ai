@@ -1,25 +1,32 @@
 class DatePlan {
   const DatePlan({
+    required this.title,
+    required this.summary,
     required this.outfit,
-    required this.firstWords,
-    required this.attitude,
-    required this.mistakes,
+    required this.whatToSay,
+    required this.howToAct,
+    required this.mistakesToAvoid,
     required this.timing,
   });
 
-  final String outfit;
-  final List<String> firstWords;
-  final List<String> attitude;
-  final List<String> mistakes;
-  final String timing;
+  final String title;
+  final String summary;
+  final List<String> outfit;
+  final List<String> whatToSay;
+  final List<String> howToAct;
+  final List<String> mistakesToAvoid;
+  final List<String> timing;
 
   factory DatePlan.fromJson(Map<String, dynamic> json) {
     return DatePlan(
-      outfit: json['outfit'] as String,
-      firstWords: List<String>.from(json['first_words'] as List),
-      attitude: List<String>.from(json['attitude'] as List),
-      mistakes: List<String>.from(json['mistakes'] as List),
-      timing: json['timing'] as String,
+      title: json['title'] as String? ?? 'Your Luxury Date Plan',
+      summary: json['summary'] as String? ?? '',
+      outfit: List<String>.from(json['outfit'] as List? ?? const []),
+      whatToSay: List<String>.from(json['what_to_say'] as List? ?? const []),
+      howToAct: List<String>.from(json['how_to_act'] as List? ?? const []),
+      mistakesToAvoid:
+          List<String>.from(json['mistakes_to_avoid'] as List? ?? const []),
+      timing: List<String>.from(json['timing'] as List? ?? const []),
     );
   }
 }
