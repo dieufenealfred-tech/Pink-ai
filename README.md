@@ -1,10 +1,5 @@
 # Pink AI
-First-date planning assistant MVP built with Flutter.
-
-## Features
-- Splash → Gender select → Form → Paywall → Result flow
-- OpenAI-powered personalized plan generation
-- Fake paywall unlock for now
+Luxury, Barbie-pink first-date planning concierge MVP built with Flutter.
 
 ## Requirements
 - Flutter stable
@@ -15,26 +10,15 @@ First-date planning assistant MVP built with Flutter.
    ```bash
    flutter pub get
    ```
-2. Run on simulator (or device):
+2. Run on iOS Simulator:
    ```bash
-   flutter run --dart-define=OPENAI_API_KEY=YOUR_KEY_HERE
-   ```
-
-### iOS Simulator steps
-1. Open Xcode and ensure command-line tools are installed.
-2. Start a simulator:
-   ```bash
-   open -a Simulator
-   ```
-3. Run:
-   ```bash
-   flutter run --dart-define=OPENAI_API_KEY=YOUR_KEY_HERE
+   flutter run -d "iPhone" --dart-define=OPENAI_API_KEY=YOUR_KEY_HERE
    ```
 
 ## OpenAI API key
 The app expects the API key via `--dart-define`. Do not hardcode secrets.
 
-You can copy `.env.example` as a reminder, but the app reads the key only via `--dart-define`:
+Example:
 ```bash
-flutter run --dart-define=OPENAI_API_KEY=YOUR_KEY_HERE
+flutter run -d "iPhone" --dart-define=OPENAI_API_KEY=YOUR_KEY_HERE
 ```
