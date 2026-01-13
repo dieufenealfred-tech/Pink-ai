@@ -1,0 +1,15 @@
+name: pink_ai
+version: 1.0.0+1
+description: First-date planning assistant MVP.
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.1
+
+flutter:
+  uses-material-design: true

@@ -1,0 +1,29 @@
+# Flutter/Dart/Pub
+.dart_tool/
+.packages
+.pub/
+pubspec.lock
+build/
+
+# iOS
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/app.flx
+ios/Flutter/ephemeral/
+ios/Pods/
+ios/Runner.xcworkspace/
+
+# Android
+android/.gradle/
+android/app/debug/
+android/app/profile/
+android/app/release/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Mac
+.DS_Store
