@@ -65,22 +65,14 @@ class _PaywallPageState extends State<PaywallPage> {
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              const SizedBox(height: 8),
-              Text(
-                'We’ll help you say the right thing, wear the right thing, '
-                'and avoid the wrong moves.',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.grey.shade700,
-                    ),
-              ),
               const SizedBox(height: 16),
+              _buildBullet('Outfit advice'),
+              _buildBullet('What to say'),
+              _buildBullet('How to act'),
+              _buildBullet('Mistakes to avoid'),
+              _buildBullet('Perfect timing'),
+              const SizedBox(height: 24),
               _buildLockedPreview(context),
-              const SizedBox(height: 20),
-              _buildChecklist('Outfit advice'),
-              _buildChecklist('What to say'),
-              _buildChecklist('How to act'),
-              _buildChecklist('Mistakes to avoid'),
-              _buildChecklist('Perfect timing'),
               if (_error != null) ...[
                 const SizedBox(height: 16),
                 Text(
@@ -100,7 +92,7 @@ class _PaywallPageState extends State<PaywallPage> {
                           color: Colors.white,
                         ),
                       )
-                    : const Text('Unlock full plan — \\$4.99'),
+                    : const Text('Unlock full plan — $4.99'),
               ),
               const SizedBox(height: 8),
               Text(
@@ -115,19 +107,14 @@ class _PaywallPageState extends State<PaywallPage> {
     );
   }
 
-  Widget _buildChecklist(String text) {
+  Widget _buildBullet(String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
         children: [
-          Icon(Icons.check_circle, size: 18, color: Colors.pink.shade400),
+          const Icon(Icons.check_circle_outline, size: 18),
           const SizedBox(width: 8),
-          Text(
-            text,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-          ),
+          Text(text),
         ],
       ),
     );
@@ -137,38 +124,31 @@ class _PaywallPageState extends State<PaywallPage> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 16,
-            offset: const Offset(0, 6),
-          ),
-        ],
+        color: Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Premium preview',
+            'Preview',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
           ),
           const SizedBox(height: 8),
           Text(
-            'Outfit that matches the venue…',
+            'Wear a clean, confident look that matches the venue…',
             style: TextStyle(color: Colors.grey.shade600),
           ),
           const SizedBox(height: 4),
           Text(
-            'A clean opening line that feels natural…',
+            'Open with a warm, simple line that feels natural…',
             style: TextStyle(color: Colors.grey.shade600),
           ),
           const SizedBox(height: 4),
           Text(
-            'How to build momentum without trying too hard…',
+            'Keep the pace relaxed and build momentum gradually…',
             style: TextStyle(color: Colors.grey.shade600),
           ),
         ],

@@ -2,29 +2,26 @@ class DateInputs {
   const DateInputs({
     required this.gender,
     required this.age,
-    required this.locationType,
-    required this.customLocation,
+    required this.location,
     required this.personality,
-    required this.budgetAmount,
+    required this.budget,
     required this.goal,
   });
 
   final String gender;
   final int age;
-  final String locationType;
-  final String? customLocation;
+  final String location;
   final String personality;
-  final double budgetAmount;
+  final String budget;
   final String goal;
 
   Map<String, dynamic> toJson() {
     return {
       'gender': gender,
       'age': age,
-      'locationType': locationType,
-      'customLocation': customLocation,
+      'location': location,
       'personality': personality,
-      'budgetAmount': budgetAmount,
+      'budget': budget,
       'goal': goal,
     };
   }
