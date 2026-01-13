@@ -65,6 +65,14 @@ class _PaywallPageState extends State<PaywallPage> {
                       fontWeight: FontWeight.bold,
                     ),
               ),
+              const SizedBox(height: 8),
+              Text(
+                'We’ll help you say the right thing, wear the right thing, '
+                'and avoid the wrong moves.',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.grey.shade700,
+                    ),
+              ),
               const SizedBox(height: 16),
               _buildLockedPreview(context),
               const SizedBox(height: 20),

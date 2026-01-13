@@ -15,6 +15,7 @@ class FormPage extends StatefulWidget {
 
 class _FormPageState extends State<FormPage> {
   static const int _totalSteps = 6;
+  static const int _stepOffset = 2;
   final PageController _controller = PageController();
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _customLocationController =
@@ -62,7 +63,6 @@ class _FormPageState extends State<FormPage> {
   void _selectOption(VoidCallback update) {
     HapticFeedback.lightImpact();
     setState(update);
-    _goNext();
   }
 
   bool get _ageValid => _age != null && _age! >= 18 && _age! <= 99;
@@ -111,7 +111,7 @@ class _FormPageState extends State<FormPage> {
                 children: [
                   const SizedBox(height: 8),
                   LinearProgressIndicator(
-                    value: (_currentStep + 1) / _totalSteps,
+                    value: (_currentStep + _stepOffset) / _totalSteps,
                     minHeight: 4,
                     borderRadius: BorderRadius.circular(8),
                     backgroundColor: Colors.pink.shade100,
@@ -121,7 +121,7 @@ class _FormPageState extends State<FormPage> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Step ${_currentStep + 1} of $_totalSteps',
+                    'Step ${_currentStep + _stepOffset} of $_totalSteps',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],
@@ -141,7 +141,6 @@ class _FormPageState extends State<FormPage> {
                   _buildPersonalityStep(context),
                   _buildBudgetStep(context),
                   _buildGoalStep(context),
-                  _buildGenerateStep(context),
                 ],
               ),
             ),
@@ -202,8 +201,8 @@ class _FormPageState extends State<FormPage> {
     return _buildStepLayout(
       context: context,
       icon: Icons.cake,
-      title: 'Tell us about your date',
-      subtitle: 'Quick questions. Big results.',
+      title: 'How old is your date?',
+      subtitle: 'Just an estimate.',
       child: Column(
         children: [
           TextField(
@@ -212,7 +211,6 @@ class _FormPageState extends State<FormPage> {
             decoration: const InputDecoration(
               labelText: 'Age',
               prefixIcon: Icon(Icons.person_outline),
-              border: OutlineInputBorder(),
             ),
             onChanged: (value) {
               final parsed = int.tryParse(value.trim());
@@ -241,7 +239,7 @@ class _FormPageState extends State<FormPage> {
     return _buildStepLayout(
       context: context,
       icon: Icons.location_on_outlined,
-      title: 'Where is the date?',
+      title: 'Where is the date happening?',
       subtitle: 'Set the scene.',
       child: Column(
         children: [
@@ -298,21 +296,20 @@ class _FormPageState extends State<FormPage> {
             TextField(
               controller: _customLocationController,
               decoration: const InputDecoration(
-                labelText: 'Custom place',
-                hintText: 'Type the place (e.g., Museum, Beach, Bowling)',
-                border: OutlineInputBorder(),
+                labelText: 'Type the place',
+                hintText: 'Type the place',
               ),
               onChanged: (_) => setState(() {}),
             ),
-            const SizedBox(height: 12),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _locationValid ? _goNext : null,
-                child: const Text('Continue'),
-              ),
-            ),
           ],
+          const Spacer(),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: _locationValid ? _goNext : null,
+              child: const Text('Continue'),
+            ),
+          ),
         ],
       ),
     );
@@ -350,6 +347,14 @@ class _FormPageState extends State<FormPage> {
             isSelected: _personality == 'Ambitious',
             onTap: () => _selectOption(() => _personality = 'Ambitious'),
           ),
+          const Spacer(),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: _personality == null ? null : _goNext,
+              child: const Text('Continue'),
+            ),
+          ),
         ],
       ),
     );
@@ -368,10 +373,8 @@ class _FormPageState extends State<FormPage> {
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               labelText: 'Budget amount',
-              hintText: 'e.g., 50',
+              hintText: 'Enter your budget',
               prefixIcon: Icon(Icons.attach_money),
-              border: OutlineInputBorder(),
-              helperText: 'You can enter any amount.',
             ),
             onChanged: (value) {
               final parsed = double.tryParse(value.trim());
@@ -381,6 +384,11 @@ class _FormPageState extends State<FormPage> {
                 setState(() => _budgetAmount = parsed);
               }
             },
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'You can enter any amount.',
+            style: Theme.of(context).textTheme.bodySmall,
           ),
           const Spacer(),
           SizedBox(
@@ -421,36 +429,26 @@ class _FormPageState extends State<FormPage> {
             isSelected: _goal == 'Serious',
             onTap: () => _selectOption(() => _goal = 'Serious'),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildGenerateStep(BuildContext context) {
-    return _buildStepLayout(
-      context: context,
-      icon: Icons.auto_awesome,
-      title: 'Ready?',
-      subtitle: 'We’ll build your plan in seconds.',
-      child: Column(
-        children: [
           const Spacer(),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {
-                if (_ageValid &&
-                    _locationValid &&
-                    _personality != null &&
-                    _budgetValid &&
-                    _goal != null) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => GeneratingPage(inputs: _buildInputs()),
-                    ),
-                  );
-                }
-              },
+              onPressed: _goal == null
+                  ? null
+                  : () {
+                      if (_ageValid &&
+                          _locationValid &&
+                          _personality != null &&
+                          _budgetValid &&
+                          _goal != null) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) =>
+                                GeneratingPage(inputs: _buildInputs()),
+                          ),
+                        );
+                      }
+                    },
               child: const Text('Generate my plan'),
             ),
           ),
@@ -489,9 +487,6 @@ class _OptionCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected ? Colors.pink.shade100 : Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: isSelected ? color : Colors.grey.shade200,
-          ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.05),

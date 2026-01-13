@@ -11,8 +11,8 @@ class PinkAiApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const primaryColor = Color(0xFFE91E63);
-    const backgroundColor = Color(0xFFFFF3F7);
+    const primaryColor = Color(0xFFE86FB7);
+    const backgroundColor = Color(0xFFFFF7FB);
     return MaterialApp(
       title: 'Pink AI',
       theme: ThemeData(
@@ -50,15 +50,15 @@ class PinkAiApp extends StatelessWidget {
           fillColor: Colors.white,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
-            borderSide: BorderSide(color: Colors.pink.shade100),
+            borderSide: BorderSide.none,
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
-            borderSide: BorderSide(color: Colors.pink.shade100),
+            borderSide: BorderSide.none,
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
-            borderSide: BorderSide(color: primaryColor),
+            borderSide: BorderSide.none,
           ),
         ),
         useMaterial3: true,
